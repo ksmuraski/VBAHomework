@@ -1,0 +1,34 @@
+Sub VBAHomework()
+
+    Dim ticker As String
+    Dim SumRow As Integer
+    Dim vol As Double
+    Dim YearClose As Double
+    Dim YearOpen As Double
+    
+    Cells(1, 9).Value = "Ticker"
+    Cells(1, 10).Value = "Total Stock Vol"
+    row = 2
+    vol = 0
+
+    lastrow = Cells(Rows.Count, 1).End(xlUp).row
+    
+    For i = 2 To lastrow
+        If YearOpen = 0 Then
+            YearOpen = Cells(i, 3).Value
+        End If
+        If Cells(i - 1, 1) = Cells(i, 1) And Cells(i + 1, 1).Value <> Cells(i, 1).Value Then
+            YearClose = Cells(i, 6).Value
+            ticker = Cells(i, 1).Value
+            volume = volume + Cells(i, 7).Value
+            Range("i" & row).Value = ticker
+            Range("j" & row).Value = vol
+            row = row + 1
+            vol = 0
+        Else
+            vol = vol + Cells(i, 7).Value
+        End If
+    Next i
+    
+    
+End Sub
